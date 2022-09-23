@@ -1,0 +1,14 @@
+.gridcontainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.gridcontainer > div {
+    padding: 30px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
