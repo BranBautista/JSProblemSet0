@@ -69,7 +69,7 @@ function dataParse(string) {
                 }
             }
             action = methodValue.slice(indexLastVariable,methodValue.length)
-            var actionFunction = new Function(arrayVariables[0], arrayVariables[1], action);
+            let actionFunction = new Function(arrayVariables[0], arrayVariables[1], action);
             object[method] = actionFunction;
         }
     }
