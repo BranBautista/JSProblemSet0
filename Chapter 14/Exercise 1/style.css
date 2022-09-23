@@ -1,0 +1,21 @@
+.gridcontainer{
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.row {
+    width: auto;
+    height: 100px;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+
+    margin: 0px;
+
+    outline: 1px solid;
+    display: inline-block;
+    background: #FFFFFF;
+}

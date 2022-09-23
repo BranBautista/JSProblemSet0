@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="display1"></div>
+
+    <div id="display2"></div>
+
+    <template id="template1">
+    <div id="image">
+        <a href="#display2"><img class="nebulat1" src="nebula.jpeg" alt="nebula"></a>
+        <div class="textt11"></div>
+        <a href="#display2"><img class="nebulat1" src="galaxy.jpeg" alt="nebula"></a>
+        <div class="textt12"></div>
+        <a href="#display2"><img class="nebulat1" src="universe.jpeg" alt="nebula"></a>
+        <div class="textt13"></div>
+    </div>
+    </template>
+    <template id="template2">
+        <div>
+        <img class="nebulat2" src="nebula.jpeg" alt="nebula">
+        <div class="textt2"></div>
+        <br>
+        <br>
+        <a id="linkt2" href="#display1">Go to template 1</a>
+        </div>
+    </template>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>

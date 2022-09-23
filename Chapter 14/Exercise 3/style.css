@@ -1,0 +1,49 @@
+body{
+    margin: 20px;
+    font-size: 1.2rem;
+}
+
+#image {
+    counter-reset: section;
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+}
+
+.nebulat1 {
+    width:400px;
+    height:300px;
+    padding: 10px;
+}
+
+#image > div::before {
+    counter-increment: section;
+    content: "Group " counter(section) ": ";
+  }
+
+.textt11, .textt12, .textt13 {
+    overflow: hidden;
+    justify-content: center;
+    text-align: justify;
+    padding: 10px;
+    flex-basis: 50%;
+}
+
+.nebulat2 {
+    width:400px;
+    height:300px;
+    float:left;
+    padding: 10px;
+}
+
+.textt2 {
+    justify-content: center;
+    text-align: justify;
+    padding: 20px;
+}
+
+#display1{
+    overflow: hidden;
+    overflow-anchor: none;
+    position: relative;
+}
