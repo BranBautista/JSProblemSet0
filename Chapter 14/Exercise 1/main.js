@@ -1,65 +1,22 @@
-$(document).ready(function () {
+let btn = document.getElementById("btninput");
+let container = document.getElementById('container');
 
-    var columns = 1;
-
-    var rows = 1;
-
-
-    var $row = $("<div />", {
-        class: 'row'
-    });
-    var $square = $("<div />", {
-        class: 'square'
-    });
-    
-    for (var i = 0; i < columns; i++) {
-        $row.append($square.clone());
+btn.addEventListener("click", function(){
+    let rows = document.getElementById('rows').value;
+    let columns = document.getElementById('columns').value;
+    let tableOpen = '<table>\n';
+    let tableBody = '';
+  
+    for(let i=0; i<rows;i++)
+    {
+        tableBody = tableBody + '<tr>';
+        for(let j=0; j<columns;j++)
+        {
+            tableBody = tableBody + '<td>';
+            tableBody = tableBody + '</td>'
+        }
+        tableBody += '</tr>\n';
     }
-    for (var i = 0; i < rows; i++) {
-        $("#gridcontainer").append($row.clone());
-    }
-
-    $("#btncolumns").click(function(){
-        columns = $('#columns').find(":selected").val();
-
-        $("#gridcontainer").empty();
-
-        var $row = $("<div />", {
-            class: 'row'
-        });
-        var $square = $("<div />", {
-            class: 'square'
-        });
-        
-        for (var i = 0; i < columns; i++) {
-            $row.append($square.clone());
-        }
-
-        for (var i = 0; i < rows; i++) {
-            $("#gridcontainer").append($row.clone());
-        }
-    
-    })
-
-    $("#btnrows").click(function(){
-        rows = $('#rows').find(":selected").val();
-
-        $("#gridcontainer").empty();
-
-        var $row = $("<div />", {
-            class: 'row'
-        });
-        var $square = $("<div />", {
-            class: 'square'
-        });
-        
-        for (var i = 0; i < columns; i++) {
-            $row.append($square.clone());
-        }
-
-        for (var i = 0; i < rows; i++) {
-            $("#gridcontainer").append($row.clone());
-        }
-    
-    })
-});
+    let tableClose = '</table>';
+    container.innerHTML = tableOpen + tableBody + tableClose;
+})
