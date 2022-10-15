@@ -16,17 +16,14 @@ body{
     padding: 10px;
 }
 
-#image > div::before {
-    counter-increment: section;
-    content: "Group " counter(section) ": ";
-  }
-
-.textt11, .textt12, .textt13 {
+#display1 .linkText {
+    text-decoration: none;
     overflow: hidden;
     justify-content: center;
     text-align: justify;
     padding: 10px;
     flex-basis: 50%;
+    color: black;
 }
 
 .nebulat2 {
