@@ -1,65 +1,65 @@
+(function(){
+    let template1 = document.getElementById("template1")
+    let template2 = document.getElementById("template2")
+
+    let display1 = document.getElementById("display1")
+    let display2 = document.getElementById("display2")
+
+    let paragraph = document.createElement("div");
 
 
-$(document).ready(function () {
-
-
-    // if(window.location.hash !==''){
-    //     var scrollPos = parseInt(window.location.hash.substring(1),10);
-    //     $(window).scrollTo(scrollPos);
-    // }
-
-    const fragmentTextt11 = new DocumentFragment();
-    const fragmentTextt12 = new DocumentFragment();
-    const fragmentTextt13 = new DocumentFragment();
-    const fragmentTextt2 = new DocumentFragment();
-
-    var temp1 = $("#template1");
-    var copy1 = temp1.contents().clone();
-    $("#display1").append(copy1);
-
-    var temp2 = $("#template2");
-    var copy2 = temp2.contents().clone();
-    $("#display2").append(copy2);
-
-    $(".textt11").append('<h2 style="font-size:1.2rem;">Faculty members from groups</h2>');
-    $.getJSON("scientist.json", function (json) {
-        for (let i = 0; i < 30; i++) {
-            fragmentTextt11.append(`First Name: ${json[i].firstName}, `);
-            fragmentTextt11.append(`Last Name: ${json[i].lastName}. `);
-            fragmentTextt11.append(` Subject: ${json[i].subject}. `);
+    fetch("./scientist.json")
+    .then(function(resp){
+        return resp.json();
+    })
+    .then(function(data){
+        let output1 = "";
+        let output2 = "";
+        let i = 1;
+        for(let scientist of data){
+            output1 += `
+                <div id="image">
+                    <a href="#display2"><img class="nebulat1" src='${scientist.image}'></a>
+                    <a href="#display2" class="linkText"><div class="textt1${i}">
+                        First Name: ${scientist.firstName}
+                        <br>
+                        Last Name: ${scientist.lastName}
+                        <br>
+                        Subject: ${scientist.subject}
+                        <br>
+                        Biography: ${scientist.biography}
+                    </div></a>
+                </div>
+            `;
+            i += 1; 
         }
-        console.log(fragmentTextt11)
-        $(".textt11").append(fragmentTextt11);
-    });
 
-    $(".textt12").append('<h2 style="font-size:1.2rem;">Faculty members from groups</h2>');
-    $.getJSON("scientist.json", function (json) {
-        for (let i = 30; i < 60; i++) {
-            fragmentTextt12.append(`First Name: ${json[i].firstName}, `);
-            fragmentTextt12.append(`Last Name: ${json[i].lastName}. `);
-            fragmentTextt12.append(` Subject: ${json[i].subject}. `);
-        }
-        $(".textt12").append(fragmentTextt12);
-    });
+        output2 += `
+            <div>
+                <img class="nebulat2" src='${data[0].image}' alt="nebula">
+                <div class="textt2">
+                    First Name: ${data[0].firstName}
+                    <br>
+                    Last Name: ${data[0].lastName}
+                    <br>
+                    Subject: ${data[0].subject}
+                    <br>
+                    Biography: ${data[0].biography}
+                </div>
+                <br>
+                <br>
+                <a id="linkt2" href="#display1">Go to template 1</a>
+            </div>
+            `;
 
-    $(".textt13").append('<h2 style="font-size:1.2rem;">Faculty members from groups</h2>');
-    $.getJSON("scientist.json", function (json) {
-        for (let i = 60; i < 90; i++) {
-            fragmentTextt13.append(`First Name: ${json[i].firstName}, `);
-            fragmentTextt13.append(`Last Name: ${json[i].lastName}. `);
-            fragmentTextt13.append(`Subject: ${json[i].subject}. `);
-        }
-        $(".textt13").append(fragmentTextt13);
-    });
+        template1.innerHTML = output1;
+        template2.innerHTML = output2;
 
-    $(".textt2").append('<h2 style="font-size:1.2rem;">Faculty members and subjects</h2>');
-    $.getJSON("scientist.json", function (json) {
-        for (let i = 0; i < json.length; i++) {
-            fragmentTextt2.append(`${i+1}. First Name: ${json[i].firstName}, `);
-            fragmentTextt2.append(`Last Name: ${json[i].lastName}. `);
-            fragmentTextt2.append(`The subject: ${json[i].subject}. `);
-        }
-        $(".textt2").append(fragmentTextt2);
-    });
+        let cloneTemplate1 = template1.content.cloneNode(true);
+        let cloneTemplate2 = template2.content.cloneNode(true);
 
-});
+        display1.appendChild(cloneTemplate1);
+        display2.appendChild(cloneTemplate2);
+    })
+
+}())
