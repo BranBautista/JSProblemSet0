@@ -39,7 +39,7 @@ Image.prototype.getPixel = function (positionX, positionY) {
         let positionArray = (positionY-1)*this.width + positionX;
         return this.data[positionArray-1]
     } else {
-        throw Error ('This pixel is not part of the image');
+        throw new Error ('This pixel is not part of the image');
     }
 }
 
