@@ -15,11 +15,11 @@ function printObjProp(object,propObjInstance){
     let protoObj = Object.getPrototypeOf(object);
     let propProtoArray = Object.keys(protoObj);
 
-    if(typeof propObjInstance == 'undefined' || propObjInstance == false){
-        properties = propArray.concat(propProtoArray).toString();
+    if(propObjInstance === true){
+        properties = propArray.toString();
     }
     else{
-        properties = propArray.toString();
+        properties = propArray.concat(propProtoArray).toString();
     }
     return properties;
 }
