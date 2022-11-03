@@ -1,4 +1,7 @@
-let data = new Array(1600);
+let sizeX = 40;
+let sizeY = 40;
+
+let data = new Array(sizeX*sizeY);
 
 function dataFulfilled (array){
     for (let i = 0; i < array.length; i++){
@@ -20,20 +23,12 @@ function dataFulfilled (array){
 
 dataFulfilled(data);
 
-let sizeX = Math.sqrt(data.length);
-let sizeY = Math.sqrt(data.length);
-
 //This is going to be our creator function:
 function Image(data, sizeX, sizeY, name) {
-    if (sizeX > 0 && sizeY > 0) { //Here I prevent negative values
         this.data = data;
         this.width = sizeX;
         this.heigth = sizeY;
         this.name = name;
-    }
-    else {
-        return console.error('Invalid size');
-    }
 }
 
 Image.prototype.getPixel = function (positionX, positionY) {
@@ -44,7 +39,7 @@ Image.prototype.getPixel = function (positionX, positionY) {
         let positionArray = (positionY-1)*this.width + positionX;
         return this.data[positionArray-1]
     } else {
-        return 'This pixel is not part of the image';
+        throw Error ('This pixel is not part of the image');
     }
 }
 
