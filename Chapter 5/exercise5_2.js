@@ -28,20 +28,20 @@ let arrayPersons =  [[ 'Eva', 'Ana e6', 'Nora', 'Gabriela', 'Alberto' ],
 [ 'Eva', 'Mariana', 'Alba', 'Ana', 'Ulisas' ],
 [ 'Álvaro', 'Manuel', 'Alba', 'Álvaro', 'Juan' ]] ;
 
-function algorithmSearh(string){
+function algorithmSearh(nameSearch){
 
     //memoization
-    if(memoObj[string]!== undefined){
-        return memoObj[string];
+    if(memoObj[nameSearch]!== undefined){
+        return memoObj[nameSearch];
     }
 
-    let equipmentNumber = string[string.length-1];
+    let equipmentNumber = nameSearch[nameSearch.length-1];
     let helpStringP, helpStringE, helpIndex;
     let numberOfItems=0;
     let arrayLocations=[];
 
-    if (string[0] === 'e'){
-        memoObj[string] = [];
+    if (nameSearch[0] === 'e'){
+        memoObj[nameSearch] = [];
         for (let i = 0; i < floors; i++){
             for(let j = 0; j < rooms; j++){
                 helpStringP = arrayPersons[i][j];
@@ -51,27 +51,27 @@ function algorithmSearh(string){
                     if (helpStringP[helpStringP.length-1]== equipmentNumber){
                         numberOfItems = numberOfItems + 1;
                         arrayLocations.push([i+1, j+1]);
-                        memoObj[string].push([i+1, j+1]);
+                        memoObj[nameSearch].push([i+1, j+1]);
                     }
                 }
                 else{
                     if (helpStringE[helpStringE.length-1]== equipmentNumber){
                         numberOfItems = numberOfItems + 1;
                         arrayLocations.push([i+1, j+1]);
-                        memoObj[string].push([i+1, j+1]);
+                        memoObj[nameSearch].push([i+1, j+1]);
                     }
                 }
             }
         }
     }
     else{
-        memoObj[string] = [];
+        memoObj[nameSearch] = [];
         for (let i = 0; i < floors; i++){
             for(let j = 0; j < rooms; j++){
-                if (arrayPersons[i][j] == string){
+                if (arrayPersons[i][j] == nameSearch){
                     numberOfItems = numberOfItems + 1;
                     arrayLocations.push([i+1, j+1]);
-                    memoObj[string].push([i+1, j+1]);
+                    memoObj[nameSearch].push([i+1, j+1]);
                 }
             }
         }
