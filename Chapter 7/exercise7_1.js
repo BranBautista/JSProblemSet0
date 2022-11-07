@@ -1,22 +1,12 @@
-function convHexToRGB(num) {
-    const numString = num.slice(1);
-    let arrayRGB=[];
-    let regexHexNum = /#[a-fA-F0-9]{6}/;
-    if (regexHexNum.test(num)){
-        for (let i = 2; i <= numString.length; i = i+2){
-            subString = numString.substring(i-2,i);
-            for(let j=0; j<subString.length; j++){
-                if (j%2 == 0){
-                    firstNumber = parseInt(subString[j], 16)*16;
-                }
-                else {
-                    secondNumber = parseInt(subString[j],16);
-                }
-            }
-            arrayRGB.push(firstNumber + secondNumber); 
-        }
-        return `rgb (${arrayRGB[0]}, ${arrayRGB[1]}, ${arrayRGB[2]})`;
-    }
-}
+function hexToRgb(num) {
+    let regexHexNum = /^#([a-fA-F\d]{2})([a-fA-F\d]{2})([a-fA-F\d]{2})$/;
+    let result = regexHexNum.exec(num);
 
-console.log(convHexToRGB('#3020ff'));
+    let rgb1 = parseInt(result[1], 16),
+    rgb2 = parseInt(result[2], 16),
+    rgb3 = parseInt(result[3], 16);
+
+    return `rgb (${rgb1}, ${rgb2}, ${rgb3})`;
+}
+  
+console.log(hexToRgb("#3020ff"));
