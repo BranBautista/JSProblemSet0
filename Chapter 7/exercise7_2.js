@@ -1,52 +1,45 @@
-let tablesHolidaysNL = {
-    holidays: ['Nieuwjaarsdag', 'Koningsdag', 'Bevrijdingsdag', 'Hemelvaartsdag', 'Eerste en tweede kerstdag'],
-    days: ['01/01', '27/04', '05/05', '26/05', '25/12']
-}
+let mapHolidaysUS = new Map()
+let mapHolidaysNL = new Map()
 
-let tablesHolidaysUS = {
-    holidays: ['New Year´s Day', 'April Fools´ Day', 'Juneteenth National Independence Day', 'Independence Day', 'Veterans´ Day', 'Christmas Day'],
-    days: ['01/01', '04/01', '06/19', '07/04', '11/11', '12/25']
-}
+mapHolidaysNL.set('01/01','Nieuwjaarsdag');
+mapHolidaysNL.set('27/04','Koningsdag');
+mapHolidaysNL.set('05/05','Bevrijdingsdag');
+mapHolidaysNL.set('26/05','Hemelvaartsdag');
+mapHolidaysNL.set('25/12','Eerste en tweede kerstdag');
 
-const sizeHolidaysNL = tablesHolidaysNL.days.length;
-const sizeHolidaysUS = tablesHolidaysUS.days.length;
+mapHolidaysUS.set('01/01','New Year´s Day');
+mapHolidaysUS.set('04/01','April Fools´ Day');
+mapHolidaysUS.set('06/19','Juneteenth National Independence Day');
+mapHolidaysUS.set('07/04','Independence Day');
+mapHolidaysUS.set('11/11','Veterans´ Day');
+mapHolidaysUS.set('12/25','Christmas Day');
 
 function styleDateFormat(date) {
-    let day, month, year;
-    let regexDay, regexMonth, regexYear;
-
-    let regexUS = /English/;
-    if (regexUS.test(date)) {
-        regexMonth = /[0-1][0-9]/;
-        regexDay = /(?<=\/)[0-3][0-9]/;
-        regexYear = /(?<=\/)[0-9]{4}/;
-        month = date.match(regexMonth)[0];
-        day = date.match(regexDay)[0];
-        year = date.match(regexYear)[0];
-        for (let i = 0; i < sizeHolidaysNL; i++) {
-            console.log(i)
-            console.log(`${day}/${month}`)
-            if (tablesHolidaysNL.days[i] === `${day}/${month}`) {
-                return `Dutch-NL: ${day}/${month}/${year} (${tablesHolidaysNL.holidays[i]})`;
-            }
+    let day, month, year
+    let regexDate = /([a-zA-Z]*)(\W)([a-zA-Z]*)*(\W){2}([0-3][0-9])\/([0-3][0-9])\/(\d{4})$/;
+    let arrayDate = regexDate.exec(date);
+    if(arrayDate[1] == 'English'){
+        day = arrayDate[6];
+        month = arrayDate[5];
+        year = arrayDate[7];
+        if(mapHolidaysNL.get(`${day}/${month}`) != 'undefined'){
+            return `Dutch-NL: ${day}/${month}/${year} (${mapHolidaysNL.get(`${day}/${month}`)})`
         }
-        return `Dutch-NL: ${day}/${month}/${year}`;
-    }
-    else {
-        regexMonth = /(?<=\/)[0-1][0-9]/;
-        regexDay = /[0-3][0-9]/;
-        regexYear = /(?<=\/)[0-9]{4}/;
-        month = date.match(regexMonth)[0];
-        day = date.match(regexDay)[0];
-        year = date.match(regexYear)[0];
-        for (let i = 0; i < sizeHolidaysUS; i++) {
-            if (tablesHolidaysUS.days[i] === `${month}/${day}`) {
-                return `English-US: ${month}/${day}/${year} (${tablesHolidaysUS.holidays[i]})`;
-            }
+        else{
+            return `Dutch-NL: ${day}/${month}/${year}`;
         }
-        return `English-US: ${month}/${day}/${year}`;
     }
-
+    else{
+        day = arrayDate[5];
+        month = arrayDate[6];
+        year = arrayDate[7];
+        if(mapHolidaysUS.get(`${month}/${day}`) !== 'undefined'){
+            return `English-US: ${month}/${day}/${year} (${mapHolidaysUS.get(`${month}/${day}`)})`
+        }
+        else{
+            return `English-US: ${month}/${day}/${year}`;
+        }
+    }
 }
 
 console.log(styleDateFormat('English-US: 01/01/2014'));

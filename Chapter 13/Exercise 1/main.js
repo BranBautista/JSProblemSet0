@@ -1,9 +1,11 @@
-
-
 const tableContainer = document.getElementById("table");
 
 const table = document.createElement("div");
 table.classList.add("gridcontainer");
+
+function alertNumber(event) {
+    alert(event.target.innerText);
+}
 
 for (i=0; i<25; i++){
     const row = document.createElement("div");
@@ -13,12 +15,6 @@ for (i=0; i<25; i++){
     table.appendChild(row);
 }
 
+table.addEventListener("click", alertNumber);
+
 tableContainer.appendChild(table);
-
-const elements = document.getElementsByClassName("element");
-
-for (let i = 0; i < elements.length; i++){
-    elements[`${i}`].addEventListener("click", function (){
-        alert(this.innerHTML);
-    })
-}

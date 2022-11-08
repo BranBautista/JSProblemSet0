@@ -1,5 +1,7 @@
 let btn = document.getElementById("btninput");
 let container = document.getElementById('container');
+let table = document.createElement('div');
+
 
 btn.addEventListener("click", function(){
     let rows = document.getElementById('rows').value;
@@ -18,5 +20,10 @@ btn.addEventListener("click", function(){
         tableBody += '</tr>\n';
     }
     let tableClose = '</table>';
-    container.innerHTML = tableOpen + tableBody + tableClose;
+
+    let displayTag = tableOpen + tableBody + tableClose;
+    
+    table.insertAdjacentHTML("afterbegin",displayTag);
+    let cloneTable = table.cloneNode(true);
+    container.appendChild(cloneTable);
 })
