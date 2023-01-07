@@ -1,25 +1,25 @@
-function objectCustom(number) {
+class ObjectCreator {
+    #_prop
+    constructor(number) {
+        this.#_prop = number;
+        this.prop = number;
+    }
 
-    obj = {
-        get prop() {
-                return this.__prop__;
-        },
-        set prop(number) {
-            if (typeof number == 'number'){
-                this.__prop__ = number;
-            }
-            else {
-                throw new Error('Whops, is not a number')
-            }
-        },
-    };
-
-    Object.defineProperty(obj, "__prop__", {value: number, enumerable:false, writable:false})
-
-    obj.prop = number
-
-    return obj
-
+    get prop() {
+        return this.#_prop;
+    }
+    
+    set prop(number) {
+        if (typeof number == 'number'){
+            this.#_prop = number;
+        }
+        else {
+            throw new Error('Whops, is not a number')
+        }
+    }
 }
 
-const n = objectCustom(3);
+
+let customObject = new ObjectCreator(3);
+
+console.log(customObject.prop);

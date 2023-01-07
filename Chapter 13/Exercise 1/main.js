@@ -12,9 +12,8 @@ for (i=0; i<25; i++){
     row.classList.add("element");
     const text = document.createTextNode(`${i+1}`);
     row.appendChild(text);
+    row.addEventListener("click", alertNumber)
     table.appendChild(row);
 }
-
-table.addEventListener("click", alertNumber);
 
 tableContainer.appendChild(table);

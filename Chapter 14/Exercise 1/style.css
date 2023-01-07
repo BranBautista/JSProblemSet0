@@ -1,21 +1,13 @@
 .gridcontainer{
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
+    display: grid;
+    grid-template-rows: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
 }
 
-.row {
-    width: auto;
-    height: 100px;
-}
-
-.square {
-    width: 100px;
-    height: 100px;
-
-    margin: 0px;
-
-    outline: 1px solid;
-    display: inline-block;
-    background: #FFFFFF;
+.gridcontainer > div {
+    padding: 30px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
 }
