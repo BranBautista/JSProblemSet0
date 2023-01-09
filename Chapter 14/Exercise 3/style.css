@@ -3,7 +3,7 @@ body{
     font-size: 1.2rem;
 }
 
-.image {
+.containerImage {
     counter-reset: section;
     display: flex;
     flex-flow: row wrap;
@@ -16,7 +16,7 @@ body{
     padding: 10px;
 }
 
-#display1 .linkText {
+#display .linkText {
     text-decoration: none;
     overflow: hidden;
     justify-content: center;
@@ -33,13 +33,13 @@ body{
     padding: 10px;
 }
 
-.textt2 {
+.textViewOthers {
     justify-content: center;
     text-align: justify;
     padding: 20px;
 }
 
-#display1{
+#display{
     overflow: hidden;
     overflow-anchor: none;
     position: relative;

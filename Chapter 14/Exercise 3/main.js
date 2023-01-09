@@ -1,255 +1,179 @@
-(function () {
+async function requestData() {
+    let url = './scientist.json';
+    try {
+        let res = await fetch(url);
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-    // document.location.reload(true)
+async function getData() {
+    let data = await requestData();
+    localStorage.setItem('dataJSON', JSON.stringify(data));
+    return JSON.parse(localStorage.getItem('dataJSON'));
 
-    let display1 = document.getElementById("display1")
-    let display2 = document.getElementById("display2")
+}
 
-    let template1 = document.getElementById("template1")
-    let template2 = document.getElementById("template2")
+async function workData(fragment) {
+    dataJSON = await getData();
+    createDisplayView1(dataJSON,fragment);
+    display.appendChild(fragment);
+    createLinks();
+}
 
-    cloneTemplate1 = template1.content.cloneNode(true);
-    cloneTemplate2 = template2.content.cloneNode(true);
-
-    let div1Temp1 = cloneTemplate1.getElementById("div1Temp1");
-
-    let linkImage1 = document.createElement("a");
-    linkImage1.setAttribute("id","linkImage1");
-    linkImage1.setAttribute("class","linkImage");
-    linkImage1.setAttribute("href","#text1Temp2");
-    let linkText1 = document.createElement("a");
-    linkText1.setAttribute("id","linkText1");
-    linkText1.setAttribute("class","linkText");
-    linkText1.setAttribute("href","#text1Temp2");
-    let textTemp1 = document.createElement("div");
-    textTemp1.setAttribute("id","textTemp1");
-    textTemp1.setAttribute("class","textTemp1");
-    linkText1.appendChild(textTemp1);
-
-
-    let div2Temp1 = cloneTemplate1.getElementById("div2Temp1");
-
-    let linkImage2 = document.createElement("a");
-    linkImage2.setAttribute("id","linkImage2");
-    linkImage2.setAttribute("class","linkImage");
-    linkImage2.setAttribute("href","#text2Temp2");
-    let linkText2 = document.createElement("a");
-    linkText2.setAttribute("id","linkText2");
-    linkText2.setAttribute("class","linkText");
-    linkText2.setAttribute("href","#text2Temp2");
-    let textTemp2 = document.createElement("div");
-    textTemp2.setAttribute("id","textTemp2");
-    textTemp2.setAttribute("class","textTemp1");
-    linkText2.appendChild(textTemp2);
-
-
-    let div3Temp1 = cloneTemplate1.getElementById("div3Temp1");
-
-    let linkImage3 = document.createElement("a");
-    linkImage3.setAttribute("id","linkImage3");
-    linkImage3.setAttribute("class","linkImage");
-    linkImage3.setAttribute("href","#text3Temp2");
-    let linkText3 = document.createElement("a");
-    linkText3.setAttribute("id","linkText3");
-    linkText3.setAttribute("class","linkText");
-    linkText3.setAttribute("href","#text3Temp2");
-    let textTemp3 = document.createElement("div");
-    textTemp3.setAttribute("id","textTemp3");
-    textTemp3.setAttribute("class","textTemp1");
-    linkText3.appendChild(textTemp3);
-
-
-    div1Temp1.appendChild(linkImage1);
-    div1Temp1.appendChild(linkText1);
-
-    div2Temp1.appendChild(linkImage2);
-    div2Temp1.appendChild(linkText2);
- 
-    div3Temp1.appendChild(linkImage3);
-    div3Temp1.appendChild(linkText3);
-
-    // let linkt2 = cloneTemplate2.getElementsByClass("linkt2");
-    let link1 = cloneTemplate2.getElementById("link1");
-    let link2 = cloneTemplate2.getElementById("link2");
-    let link3 = cloneTemplate2.getElementById("link3");
-
-    let div1Temp2 = cloneTemplate2.getElementById("div1Temp2");
-    let text1t2 = cloneTemplate2.getElementById("text1Temp2");
-
-    let div2Temp2 = cloneTemplate2.getElementById("div2Temp2");
-    let text2t2 = cloneTemplate2.getElementById("text2Temp2");
-    
-    let div3Temp2 = cloneTemplate2.getElementById("div3Temp2");
-    let text3t2 = cloneTemplate2.getElementById("text3Temp2");
-
-    fetch("./scientist.json")
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-
-            let img1 = `<img class="nebulat1" src='${data[0].image}'></img>`;
-            let text1 = `First Name: ${data[0].firstName}
-            <br>
-            Last Name: ${data[0].lastName}
-            <br>
-            Subject: ${data[0].subject}
-            <br>
-            Biography: ${data[0].biography.substring(0,200)}
-            `;
-
-            let img2 = `<img class="nebulat1" src='${data[1].image}'></img>`;
-            let text2 = `First Name: ${data[1].firstName}
-            <br>
-            Last Name: ${data[1].lastName}
-            <br>
-            Subject: ${data[1].subject}
-            <br>
-            Biography: ${data[1].biography.substring(0,200)}
-            `;
-
-            let img3 = `<img class="nebulat1" src='${data[2].image}'></img>`;
-            let text3 = `First Name: ${data[2].firstName}
-            <br>
-            Last Name: ${data[2].lastName}
-            <br>
-            Subject: ${data[2].subject}
-            <br>
-            Biography: ${data[2].biography.substring(0,200)}
-            `;
-
-            linkImage1.insertAdjacentHTML("afterbegin",img1);
-            textTemp1.insertAdjacentHTML("afterbegin",text1);
-
-            linkImage2.insertAdjacentHTML("afterbegin",img2);
-            textTemp2.insertAdjacentHTML("afterbegin",text2);
-
-            linkImage3.insertAdjacentHTML("afterbegin",img3);
-            textTemp3.insertAdjacentHTML("afterbegin",text3);
-
-
-            div1Temp1.appendChild(linkImage1);
-            div1Temp1.appendChild(linkText1);
-
-            div2Temp1.appendChild(linkImage2);
-            div2Temp1.appendChild(linkText2);
-
-            div3Temp1.appendChild(linkImage3);
-            div3Temp1.appendChild(linkText3);
-            
-    
-            display1.appendChild(cloneTemplate1);
-
-            // let img12 = `<img class="nebulat2" src='${data[0].image}'></img>`;
-            // let text12 = `First Name: ${data[0].firstName}
-            // <br>
-            // Last Name: ${data[0].lastName}
-            // <br>
-            // Subject: ${data[0].subject}
-            // <br>
-            // Biography: ${data[0].biography}
-            // `;
-
-            // let img22 = `<img class="nebulat2" src='${data[1].image}'></img>`;
-            // let text22 = `First Name: ${data[1].firstName}
-            // <br>
-            // Last Name: ${data[1].lastName}
-            // <br>
-            // Subject: ${data[1].subject}
-            // <br>
-            // Biography: ${data[1].biography}
-            // `;
-
-            // let img32 = `<img class="nebulat2" src='${data[2].image}'></img>`;
-            // let text32 = `First Name: ${data[2].firstName}
-            // <br>
-            // Last Name: ${data[2].lastName}
-            // <br>
-            // Subject: ${data[2].subject}
-            // <br>
-            // Biography: ${data[2].biography}
-            // `;
-
-            // div1Temp2.insertAdjacentHTML("afterbegin",img12);
-            // text1t2.insertAdjacentHTML("afterbegin",text12);
-
-            // div2Temp2.insertAdjacentHTML("afterbegin",img22);
-            // text2t2.insertAdjacentHTML("afterbegin",text22);
-
-            // div3Temp2.insertAdjacentHTML("afterbegin",img32);
-            // text3t2.insertAdjacentHTML("afterbegin",text32);
-            localStorage.setItem('display1', display1);
-            localStorage.setItem('display2', display2);
-        })
-
-
-        linkImage1.addEventListener("click", () => {
-            fetch("./scientist.json")
-            .then(function (resp) {
-                return resp.json();
-            })
-            .then(function (data) {
-                let img12 = `<img class="nebulat2" src='${data[0].image}'></img>`;
-                let text12 = `First Name: ${data[0].firstName}
-                <br>
-                Last Name: ${data[0].lastName}
-                <br>
-                Subject: ${data[0].subject}
-                <br>
-                Biography: ${data[0].biography}
-                `;
-                div1Temp2.insertAdjacentHTML("afterbegin",img12);
-                text1t2.insertAdjacentHTML("afterbegin",text12);
-            })    
-            display2.appendChild(cloneTemplate2);
-            display1.style.display = "none";
-
-            localStorage.setItem('display1', display1);
-            localStorage.setItem('display2', display2);
-            display1 = localStorage.getItem('display1') 
-            display2 = localStorage.getItem('display2') 
-        })
+function createDisplayView1(data,fragment) {
+    for (let i=0; i<3; i++){
+        let container = document.createElement(`container${i+1}`);
+            container.setAttribute("class", "containerImage");
         
-        linkText1.addEventListener("click", () => {
-            display2.style.display = "inherit"
-            display1.style.display = "none"
-        })
+        let linkImage = document.createElement("a");
+            linkImage.setAttribute("id",`linkImage${i+1}`);
+            linkImage.setAttribute("class","linkImage");
+            linkImage.setAttribute("href",`#textView${i+2}`);
+        let linkText = document.createElement("a");
+            linkText.setAttribute("id",`linkText${i+1}`);
+            linkText.setAttribute("class","linkText");
+            linkText.setAttribute("href",`#textView${i+2}`);
+        let textTemp = document.createElement("div");
+            textTemp.setAttribute("id",`textTemp${i+1}`);
+            textTemp.setAttribute("class","textTemp1");
+        
+        linkText.appendChild(textTemp);
 
-        linkImage2.addEventListener("click", () => {
-            display2.style.display = "inherit"
-            display1.style.display = "none"
-        })
+        container.appendChild(linkImage);
+        container.appendChild(linkText);
 
-        linkText2.addEventListener("click", () => {
-            display2.style.display = "inherit"
-            display1.style.display = "none"
-        })
+        renderView1(data,i,linkImage,textTemp);
 
-        linkImage3.addEventListener("click", () => {
-            display2.style.display = "inherit"
-            display1.style.display = "none"
-        })
+        fragment.appendChild(container);
+    }
+}
 
-        linkText3.addEventListener("click", () => {
-            display2.style.display = "inherit"
-            display1.style.display = "none"
-        })
+function renderView1(data, index, imageContainer, textContainer){
+    let img = `<img class="nebulat1" src='${data[index].image}'></img>`;
+    let text = `First Name: ${data[index].firstName}
+    <br>
+    Last Name: ${data[index].lastName}
+    <br>
+    Subject: ${data[index].subject}
+    <br>
+    Biography: ${data[index].biography.substring(0,200)}
+    `;
+
+    imageContainer.insertAdjacentHTML("afterbegin",img);
+    textContainer.insertAdjacentHTML("afterbegin",text);
+}
+
+function createDisplayViewOthers (data, index, fragment){
+    let container = document.createElement("container");
+
+    let textContainer = document.createElement("div");
+        textContainer.setAttribute("id",`textView${index}`);
+        textContainer.setAttribute("class","textViewOthers");
+
+    let link = document.createElement("a");
+        link.textContent = "Go back to screen 1";
+        link.setAttribute("id", `linkView`); //HERE
+        link.setAttribute("href", "#linkImage1");
+
+    renderViewOthers(data, index, textContainer, container);
+    container.appendChild(textContainer);
+    container.appendChild(link);
+
+    fragment.appendChild(container);
+}
+
+function renderViewOthers (data, index, textContainer, divContainer){
+    let img = `<img class="nebulat2" src='${data[index-2].image}'></img>`;
+    let text = `First Name: ${data[index-2].firstName}
+    <br>
+    Last Name: ${data[index-2].lastName}
+    <br>
+    Subject: ${data[index-2].subject}
+    <br>
+    Biography: ${data[index-2].biography}
+    <br>
+    <br>
+    `;
+
+    divContainer.insertAdjacentHTML("afterbegin",img);
+    textContainer.insertAdjacentHTML("afterbegin",text);
+}
+
+function createOthers(index,fragment) {
+    createDisplayViewOthers(dataJSON, index, fragment);
+    display.appendChild(fragment);
+    localStorage.setItem('view', JSON.stringify(index));
+
+    linkView.addEventListener("click", () => {
+        display.innerHTML="";
+        create();
+    })
+}
+
+function create() {
+    createDisplayView1(dataJSON, fragment1);
+    display.appendChild(fragment1);
+    localStorage.setItem('view', JSON.stringify(1));
+    createLinks();
+}
+
+function createLinks() {
+    linkImage1.addEventListener("click", () => {
+        display.innerHTML="";
+        createOthers(2, fragment2);
+    })
+    
+    linkText1.addEventListener("click", () => {
+        display.innerHTML="";
+        createOthers(2, fragment2);
+    })
+
+    linkImage2.addEventListener("click", () => {
+        display.innerHTML="";
+        createOthers(3, fragment3);
+    })
+    
+    linkText2.addEventListener("click", () => {
+        display.innerHTML="";
+        createOthers(3, fragment3);
+    })
+
+    linkImage3.addEventListener("click", () => {
+        display.innerHTML="";
+        createOthers(4, fragment4);
+    })
+    
+    linkText3.addEventListener("click", () => {
+        display.innerHTML="";
+        createOthers(4, fragment4);
+    })
+}
 
 
-        link1.addEventListener("click", () => {
-            display1.style.display = "inherit"
-            display2.innerHTML = "";
-        })
+let display = document.getElementById("display");
 
-        link2.addEventListener("click", () => {
-            display1.style.display = "inherit"
-            display2.style.display = "none"
-        })
+let dataJSON = JSON.parse(localStorage.getItem('dataJSON'));
 
-        link3.addEventListener("click", () => {
-            display1.style.display = "inherit"
-            display2.style.display = "none"
-        })
+const fragment1 = document.createDocumentFragment();
+const fragment2 = document.createDocumentFragment();
+const fragment3 = document.createDocumentFragment();
+const fragment4 = document.createDocumentFragment();
 
+if (dataJSON === null){
+    localStorage.setItem('view', JSON.stringify(1));
+    workData(fragment1);
 
-}())
+} else if (localStorage.getItem('view') === '1') {
+    create();
+}
+else if (localStorage.getItem('view') === '2') {
+    createOthers(2, fragment2);
+}
+else if (localStorage.getItem('view') === '3') {
+    createOthers(3, fragment3);
+}
+else if (localStorage.getItem('view') === '4') {
+    createOthers(4, fragment4);
+}
